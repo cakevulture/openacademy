@@ -29,14 +29,13 @@ class Course(models.Model):
 
 
 	_sql_contraints = [
-		('name_description_check',
+	('name_description_check',
 		'CHECK(name != description)',
 		"The title of the course should not be the description"),
-
-		('name_unique',
+	('name_unique',
 		'UNIQUE(name)',
 		"The course title must be unique"),
-		]
+	]
 
 class Session(models.Model):
 	_name = 'openacademy.session'
@@ -81,7 +80,7 @@ class Session(models.Model):
 				},
 			}
 
-	@api_depends('start_date', 'duration')
+	@api.depends('start_date', 'duration')
 	def _get_end_date(self):
 		for r in self:
 			if not(r.start_date and r.duration):
